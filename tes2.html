@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BRIGHT PATH — Pola Makan & Mobilitas Sosial</title>
+    <meta name="description" content="BRIGHT PATH — community programs for nutrition education, workshops, and social mobility. Join workshops, access resources, and get involved locally.">
+    <!-- Open Graph / Social preview -->
+    <meta property="og:title" content="BRIGHT PATH — Pola Makan & Mobilitas Sosial">
+    <meta property="og:description" content="Community programs for nutrition education, workshops, and social mobility.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="Logo-SMA-Transparan.png">
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload primary hero image to improve LCP -->
+    <link rel="preload" as="image" href="Lassú felszívódású szénhidrát a cukorbetegek étkezésében - Mery_hu.jpg">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Google Fonts: Poppins (existing) + Playfair Display + Montserrat for hero styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html { scroll-behavior: smooth; }
+      #backToTop {
+        position: fixed;
+        right: 20px;
+        bottom: 24px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #1ba868;
+        color: #fff;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        z-index: 9999;
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+      #backToTop.show-back {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      #backToTop:focus { outline: 2px solid #b29c47; }
+      /* Navbar link enhancements: hover lift, subtle shadow, spacing */
+      .navbar .nav-link {
+        position: relative;
+        transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+        padding: .45rem .75rem;
+        border-radius: .375rem;
+        color: inherit;
+      }
+      .navbar .nav-link h6 { margin: 0; font-weight: 600; }
+      .navbar .nav-link:hover,
+      .navbar .nav-link:focus {
+        background-color: rgba(255,255,255,0.08);
+        box-shadow: 0 8px 20px rgba(15,40,20,0.12);
+        transform: translateY(-3px);
+        text-decoration: none;
+        color: #07221a;
+      }
+      .navbar .nav-link.active {
+        background-color: rgba(255,255,255,0.12);
+        box-shadow: inset 0 -2px 0 rgba(0,0,0,0.06);
+      }
+      /* Separator bar below navbar */
+      .navbar {
+        border-bottom: 12px solid #0d6a4f;
+        box-shadow: 0 4px 12px rgba(13, 106, 79, 0.2);
+      }
+      /* Site title/header above navbar */
+      .site-header { padding: 10px 0 6px 0; }
+      .site-title {
+        margin: 0;
+        font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        font-size: clamp(20px, 3.6vw, 34px);
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 16px;
+        border-radius: 10px;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 4px 18px rgba(0,0,0,0.12);
+        transition: transform 200ms ease, box-shadow 200ms ease;
+      }
+      .site-title:hover { transform: translateY(-3px) scale(1.01); }
+      .title-decor svg { display: block; filter: drop-shadow(0 2px 6px rgba(45,106,79,0.12)); }
+      /* ribbon / underline behind the title */
+      .site-title::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -8px;
+        width: 64%;
+        height: 10px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, rgba(255,232,194,0.95), rgba(207,234,204,0.95));
+        filter: blur(0.2px);
+        z-index: -1;
+        opacity: 0.95;
+      }
+      .title-accent {
+        /* warm gradient text for the first part */
+        background: linear-gradient(90deg, #f7d9b8, #f6e8cf);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+      }
+      .title-sub {
+        color: #f4e0e2;
+        font-weight: 700;
+        margin-left: 6px;
+      }
+      /* decorative accent: small leaf motif above the description heading */
+      #description .description-decor-top {
+        display:flex; justify-content:center; align-items:center; margin-bottom:8px;
+      }
+      /* adjust accent position responsively */
+      @media (max-width: 900px) {
+        #description .desc-item::before { left: 8%; }
+      }
+      /* Accordion styling */
+      #description {
+        background-color: #e4e8b8 !important;
+        padding: 60px 20px !important;
+      }
+      #description h3 {
+        font-size: 3.8rem;
+        font-weight: 950;
+        margin-bottom: 50px;
+        background: linear-gradient(135deg, #0d6a4f 0%, #063d2f 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      #description h3::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle, rgba(13, 106, 79, 0.2) 0%, transparent 70%);
+        border-radius: 50%;
+      }
+      #description h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 6px;
+        background: linear-gradient(90deg, transparent, #0d6a4f, transparent);
+        border-radius: 3px;
+      }
+      .accordion-button {
+        background: #ffffff;
+        border: 2px solid #1ba868;
+        border-radius: 12px;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #0d6a4f;
+        padding: 16px 24px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 15px rgba(27, 168, 104, 0.12);
+        transition: all 200ms ease;
+      }
+      .accordion-button:hover {
+        background: #f9fdf8;
+        box-shadow: 0 8px 25px rgba(27, 168, 104, 0.18);
+        transform: translateY(-2px);
+      }
+      .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, rgba(27, 168, 104, 0.08), rgba(207, 234, 204, 0.1));
+        border-color: #1ba868;
+        color: #0d6a4f;
+        box-shadow: 0 6px 20px rgba(27, 168, 104, 0.15);
+      }
+      .accordion-button::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%231ba868'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+      }
+      .accordion-body {
+        background: linear-gradient(135deg, #ffffff 0%, #f9fdf8 100%);
+        border: 2px solid #1ba868;
+        border-top: none;
+        border-radius: 0 0 12px 12px;
+        padding: 32px;
+        color: #2d5a4a;
+        font-size: 1.08rem;
+        line-height: 2;
+        box-shadow: 0 4px 15px rgba(27, 168, 104, 0.08);
+        margin-bottom: 15px;
+        position: relative;
+        overflow: hidden;
+      }
+      .accordion-body::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 6px;
+        height: 100%;
+        background: linear-gradient(180deg, #1ba868 0%, #0d6a4f 100%);
+        opacity: 0.6;
+      }
+      .accordion-body::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle, rgba(27, 168, 104, 0.05) 0%, transparent 70%);
+        border-radius: 50% 0 0 0;
+      }
+      .accordion-body > * {
+        position: relative;
+        z-index: 2;
+      }
+      .accordion-button:focus {
+        box-shadow: 0 6px 20px rgba(27, 168, 104, 0.2);
+        border-color: #1ba868;
+      }
+      /* Footer styles */
+      .footer {
+        background: linear-gradient(180deg,#234f3d 0%, #163a2e 100%);
+        color: #eaf6ec;
+        padding: 36px 0 22px 0;
+        margin-top: 48px;
+      }
+      /* footer image slot (right column) */
+      .footer .footer-image {
+        max-width: 260px;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+        object-fit: cover;
+        display: inline-block;
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+      .footer a:has(.footer-image):hover .footer-image {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+      }
+      @media (max-width: 576px) {
+        .footer .footer-image {
+          max-width: 48%;
+          margin-top: 8px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+      .footer a { color: #dff3db; text-decoration: none; }
+      .footer a:hover { color: #fff; text-decoration: underline; }
+      .footer .footer-brand { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; }
+      .footer .social a { margin-right: 8px; display: inline-flex; align-items: center; justify-content: center; width:36px; height:36px; background: rgba(255,255,255,0.04); border-radius:6px; }
+      .footer small { color: rgba(255,255,255,0.75); }
+      /* Our Group styling (larger list in footer) */
+      .footer .our-group { transform: translateX(-10px); }
+      .footer .our-group h5 { font-size: 1.05rem; margin-bottom: 8px; font-weight: 600; }
+      .footer .our-group li { font-size: 1.03rem; color: #e6f3e8; margin-bottom: 6px; }
+      @media (max-width: 576px) { .footer .text-md-end { text-align: left !important; } }
+      /* Entrance animation for INFORMATION title */
+      @keyframes charSlideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      #description h3.animated-title .char {
+        display: inline-block;
+        animation: charSlideIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        animation-delay: var(--char-delay, 0s);
+      }
+    </style>
+  </head>
+  <body style="background-color: #33a67d; color: #505235;">
+      <header class="site-header">
+        <div class="container text-center">
+          <h1 class="site-title">
+            <span class="title-decor" aria-hidden="true">
+              <!-- small decorative leaf SVG -->
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                <path d="M3 21s6-4 9-7 7-9 7-9-6 1-10 5S3 21 3 21z" fill="#7fbf7a"/>
+                <path d="M7 14c2-2 5-3 8-4" stroke="#2d6a4f" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>
+              <span class="title-accent">BRIGHT PATH:</span>
+              <span class="title-sub"> Pola Makan & Mobilitas Sosial</span>
+            </span>
+          </h1>
+        </div>
+      </header>
+      <nav class="navbar navbar-expand-lg bg-success-subtle">
+        <!-- bagian navigasi bar -->
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="Tugas_SASKolaborasi.html"><h6>HOME PAGE</h6></a>
+          <a class="nav-link active" href="Produk%20Berkelanjutan.html">PRODUK BERKELANJUTAN</a>
+          <a class="nav-link active" href="tes.html">INFORMASI</a>
+          <a class="nav-link active" href="tes2.html">DAFTAR PUSTAKA</a>
+          <a class="nav-link active" href="Untitled-1.html">ABOUT US</a>
+
+        </div>
+    </div>
+  </div>
+</nav>
+<!-- Description (replacing quotes) -->
+    <div id="description">
+      <div class="container">
+        <h3 class="text-center mb-5"><b>DAFTAR PUSTAKA</b></h3>
+        <div class="accordion" id="accordionInfo">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                📚 Warisan Kolonial di Balik Peminggiran Budaya Pangan Lokal
+              </button>
+            </h2>
+            <div id="collapse1" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <b>https://www.kompas.id/baca/humaniora/2023/10/15/warisan-kolonial-di-balik-peminggiran-budaya-pangan-lokal</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                🎯 Jejak Kolonialisme di Indonesia: Dari Budaya hingga Bahasa
+              </button>
+            </h2>
+            <div id="collapse2" class="accordion-collapse collapse">
+              <div class="accordion-body">
+               <b>https://www.kompas.com/stori/read/2025/06/26/133000579/jejak-kolonialisme-di-indonesia--dari-budaya-hingga-bahasa</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                💪 Rijsttafel: Budaya Masyarakat Kolonial di Hindia Belanda pada Abad ke-19
+              </button>
+            </h2>
+            <div id="collapse3" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <b>https://kumparan.com/rico-ramadhan-1649330299679442225/rijsttafel-budaya-masyarakat-kolonial-di-hindia-belanda-pada-abad-ke-19-1xpwvU2PYZC</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                📚 Pengaruh Kolonialisme terhadap Kuliner Indonesia Masa Kini
+              </button>
+            </h2>
+            <div id="collapse4" class="accordion-collapse collapse">
+              <div class="accordion-body">
+               <b>https://kumparan.com/safira-mustafa/pengaruh-kolonialisme-terhadap-kuliner-indonesia-masa-kini-1y9vyQmEsZj</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                🤝 PERKEMBANGAN TRANSPORTASI DI PULAU JAWA MASA KOLONIAL
+              </button>
+            </h2>
+            <div id="collapse5" class="accordion-collapse collapse">
+              <div class="accordion-body">
+               <b>https://jurnal.uny.ac.id/index.php/mozaik/article/view/87920</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                ❤️ Pengaruh Kolonialisme terhadap Kuliner Indonesia Masa Kini
+              </button>
+            </h2>
+            <div id="collapse6" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <b>https://kumparan.com/safira-mustafa/pengaruh-kolonialisme-terhadap-kuliner-indonesia-masa-kini-1y9vyQmEsZj</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                🥗 Indonesia
+              </button>
+            </h2>
+            <div id="collapse7" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <b>https://www.wfp.org/countries/indonesia</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                💼 Tinjauan Strategis Ketahanan Pangan dan Gizi di Indonesia 
+              </button>
+            </h2>
+            <div id="collapse8" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <b>https://smeru.or.id/sites/default/files/publication/rr_fsn_indonesia_finalreport_ind.pdf</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                🌟 ENCYCLICAL LETTERLAUDATO SI' OF THE HOLY FATHER FRANCIS
+              </button>
+            </h2>
+            <div id="collapse9" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <b>https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                📞 The Problem of Food Loss: Challenges from the Catholic Social Teaching and Responses from Caritas    
+              </button>
+            </h2>
+            <div id="collapse10" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <b>https://www.caritas.org/wordpress/wp-content/uploads/2016/05/FAOSpeechTagle0516.pdf</b>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                🎉 Paradoks Gizi dan Kedaulatan Pangan Indonesia: Menuju Kolaborasi Sejati
+              </button>
+            </h2>
+            <div id="collapse11" class="accordion-collapse collapse">
+              <div class="accordion-body">
+               <b>https://wahanavisi.org/id/media-materi/cerita/detail/paradoks-gizi-dan-kedaulatan-pangan-indonesia-menuju-kolaborasi-sejati</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Redesigned footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-md-3 mb-3">
+        <div class="footer-brand">BRIGHT PATH</div>
+        <p style="max-width:170px; color:#e6f3e8;">A community initiative focused on nutrition and social mobility. Join our workshops and local programs to build healthier, more resilient communities.</p>
+      </div>
+      <div class="col-md-3 mb-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="Tugas_SASKolaborasi.html">Home Page</a></li>
+          <li><a href="tes.html">Informasi</a></li>
+          <li><a href="tes2.html">Daftar Pustaka</a></li>
+          <li><a href="Untitled-1.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-3 our-group">
+        <h5>Our Group</h5>
+        <ul class="list-unstyled">
+          <li>Algre <span style="font-weight:600; color:#e6f3e8;">X1/03</span></li>
+          <li>Michelle <span style="font-weight:600; color:#e6f3e8;">X1/14</span></li>
+          <li>Jethro <span style="font-weight:600; color:#e6f3e8;">X1/15</span></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-3 text-md-end">
+        <h5><b>SMA ST. THERESIA</b></h5>
+        <div>
+          <a href="https://www.sttheresia-jkt.sch.id/" target="_blank" rel="noopener noreferrer">
+            <img src="Logo-SMA-Transparan.png" alt="BRIGHT PATH image" class="footer-image img-fluid">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-3"><small>© 2025 BRIGHT PATH — <a href="#"><span style="font-weight:600; color:#e6f3e8;">"Menjadi Pemimpin yang Peduli, Kreatif, dan Berwawasan Global"</span></a></small></div>
+  </div>
+</footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" aria-label="Back to top">↑<span class="visually-hidden">Back to top</span></button>
+
+    <script>
+      window.onscroll = function() {
+        const btn = document.getElementById('backToTop');
+        // show after 100px scrolled
+        if (document.documentElement.scrollTop > 100) {
+          btn.classList.add('show-back');
+        } else {
+          btn.classList.remove('show-back');
+        }
+      };
+
+      document.getElementById('backToTop').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+    <!-- Load Bootstrap JS at end of body to avoid render blocking -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Entrance animation for INFORMATION title -->
+    <script>
+      function animateInformationTitle() {
+        const titleEl = document.querySelector('#description h3');
+        if (!titleEl || titleEl.classList.contains('animated-title')) return;
+        
+        const text = titleEl.textContent.trim();
+        titleEl.textContent = '';
+        titleEl.classList.add('animated-title');
+        
+        let charIndex = 0;
+        for (let char of text) {
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          const delay = (charIndex * 0.15);
+          span.style.setProperty('--char-delay', delay + 's');
+          titleEl.appendChild(span);
+          charIndex++;
+        }
+      }
+
+      // Run animation when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', animateInformationTitle);
+      } else {
+        animateInformationTitle();
+      }
+    </script>
+    <!-- Hero: Split titles into characters and animate on entrance (respects reduced-motion) -->
+    <script>
+    (function(){
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      function splitText(selector){
+        document.querySelectorAll(selector).forEach(function(el){
+          if (el.dataset.splitted) return;
+          var text = el.textContent || '';
+          // Keep surrounding whitespace trimmed but preserve internal spaces
+          text = text.trim();
+          el.textContent = '';
+          var i = 0;
+          for (var ch of text){
+            var span = document.createElement('span');
+            span.className = 'char';
+            if (ch === ' ') span.innerHTML = '&nbsp;'; else span.textContent = ch;
+            span.style.setProperty('--i', i);
+            el.appendChild(span);
+            i++;
+          }
+          el.dataset.splitted = '1';
+        });
+      }
+
+      function animateSlideChars(slide){
+        if (!slide) return;
+        var chars = slide.querySelectorAll('.char');
+        chars.forEach(function(span){
+          var i = parseInt(span.style.getPropertyValue('--i') || 0, 10);
+          var delay = (i * 0.04).toFixed(2);
+          span.style.animation = 'none';
+          // force reflow
+          void span.offsetWidth;
+          span.style.animation = 'charIn 620ms cubic-bezier(.2,.8,.2,1) ' + delay + 's both';
+        });
+
+        var subs = slide.querySelectorAll('.hero-subtitle');
+        subs.forEach(function(sub, idx){
+          sub.style.animation = 'none';
+          void sub.offsetWidth;
+          sub.style.animation = 'heroSubtitleIn 700ms ease ' + (0.18) + 's both';
+        });
+      }
+
+      // Split hero titles on load
+      splitText('.hero-title');
+
+      var carousel = document.getElementById('heroCarousel');
+      if (carousel){
+        // animate first active slide
+        var active = carousel.querySelector('.carousel-item.active');
+        animateSlideChars(active);
+
+        // re-animate when slide finishes sliding
+        carousel.addEventListener('slid.bs.carousel', function(){
+          var now = carousel.querySelector('.carousel-item.active');
+          animateSlideChars(now);
+        });
+      }
+    })();
+    </script>
+  
+</body>
+</html>

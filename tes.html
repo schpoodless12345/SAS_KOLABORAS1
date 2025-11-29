@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BRIGHT PATH — Pola Makan & Mobilitas Sosial</title>
+    <meta name="description" content="BRIGHT PATH — community programs for nutrition education, workshops, and social mobility. Join workshops, access resources, and get involved locally.">
+    <!-- Open Graph / Social preview -->
+    <meta property="og:title" content="BRIGHT PATH — Pola Makan & Mobilitas Sosial">
+    <meta property="og:description" content="Community programs for nutrition education, workshops, and social mobility.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="Logo-SMA-Transparan.png">
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload primary hero image to improve LCP -->
+    <link rel="preload" as="image" href="Lassú felszívódású szénhidrát a cukorbetegek étkezésében - Mery_hu.jpg">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Google Fonts: Poppins (existing) + Playfair Display + Montserrat for hero styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html { scroll-behavior: smooth; }
+      #backToTop {
+        position: fixed;
+        right: 20px;
+        bottom: 24px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #1ba868;
+        color: #fff;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        z-index: 9999;
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+      #backToTop.show-back {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      #backToTop:focus { outline: 2px solid #b29c47; }
+      /* Navbar link enhancements: hover lift, subtle shadow, spacing */
+      .navbar .nav-link {
+        position: relative;
+        transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+        padding: .45rem .75rem;
+        border-radius: .375rem;
+        color: inherit;
+      }
+      .navbar .nav-link h6 { margin: 0; font-weight: 600; }
+      .navbar .nav-link:hover,
+      .navbar .nav-link:focus {
+        background-color: rgba(255,255,255,0.08);
+        box-shadow: 0 8px 20px rgba(15,40,20,0.12);
+        transform: translateY(-3px);
+        text-decoration: none;
+        color: #07221a;
+      }
+      .navbar .nav-link.active {
+        background-color: rgba(255,255,255,0.12);
+        box-shadow: inset 0 -2px 0 rgba(0,0,0,0.06);
+      }
+      /* Separator bar below navbar */
+      .navbar {
+        border-bottom: 12px solid #0d6a4f;
+        box-shadow: 0 4px 12px rgba(13, 106, 79, 0.2);
+      }
+      /* Site title/header above navbar */
+      .site-header { padding: 10px 0 6px 0; }
+      .site-title {
+        margin: 0;
+        font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        font-size: clamp(20px, 3.6vw, 34px);
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 16px;
+        border-radius: 10px;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 4px 18px rgba(0,0,0,0.12);
+        transition: transform 200ms ease, box-shadow 200ms ease;
+      }
+      .site-title:hover { transform: translateY(-3px) scale(1.01); }
+      .title-decor svg { display: block; filter: drop-shadow(0 2px 6px rgba(45,106,79,0.12)); }
+      /* ribbon / underline behind the title */
+      .site-title::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -8px;
+        width: 64%;
+        height: 10px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, rgba(255,232,194,0.95), rgba(207,234,204,0.95));
+        filter: blur(0.2px);
+        z-index: -1;
+        opacity: 0.95;
+      }
+      .title-accent {
+        /* warm gradient text for the first part */
+        background: linear-gradient(90deg, #f7d9b8, #f6e8cf);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+      }
+      .title-sub {
+        color: #f4e0e2;
+        font-weight: 700;
+        margin-left: 6px;
+      }
+      /* decorative accent: small leaf motif above the description heading */
+      #description .description-decor-top {
+        display:flex; justify-content:center; align-items:center; margin-bottom:8px;
+      }
+      /* adjust accent position responsively */
+      @media (max-width: 900px) {
+        #description .desc-item::before { left: 8%; }
+      }
+      /* Description cards styling */
+      #description {
+        background: linear-gradient(135deg, #e4e8b8 0%, #d8e0a0 100%) !important;
+        padding: 60px 0 !important;
+      }
+      #description h2 {
+        font-size: 3.2rem;
+        font-weight: 900;
+        margin-bottom: 50px;
+        background: linear-gradient(135deg, #1ba868 0%, #0d6a4f 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      #description h2::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 5px;
+        background: linear-gradient(90deg, transparent, #1ba868, transparent);
+        border-radius: 3px;
+      }
+      .desc-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        margin-bottom: 30px;
+        border-left: 6px solid #1ba868;
+        transition: transform 200ms ease, box-shadow 200ms ease;
+      }
+      .desc-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+      }
+      .desc-card p {
+        font-size: 1.3rem;
+        line-height: 1.8;
+        color: #333;
+        margin: 0;
+        font-weight: 500;
+      }
+      /* Decorative elements for cards */
+      .desc-card::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(circle, rgba(27, 168, 104, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+      }
+      .desc-card::after {
+        content: "";
+        position: absolute;
+        bottom: 20px;
+        left: 30px;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, rgba(27, 168, 104, 0.06), rgba(13, 106, 79, 0.06));
+        border-radius: 8px;
+        z-index: 0;
+      }
+      .desc-card {
+        position: relative;
+      }
+      .desc-card p {
+        position: relative;
+        z-index: 1;
+      }
+      /* Leaf icon styling */
+      .card-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, rgba(27, 168, 104, 0.12), rgba(207, 234, 204, 0.15));
+        border-radius: 50%;
+        margin-bottom: 15px;
+        font-size: 28px;
+      }
+      /* Footer styles */
+      .footer {
+        background: linear-gradient(180deg,#234f3d 0%, #163a2e 100%);
+        color: #eaf6ec;
+        padding: 36px 0 22px 0;
+        margin-top: 48px;
+      }
+      /* footer image slot (right column) */
+      .footer .footer-image {
+        max-width: 260px;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+        object-fit: cover;
+        display: inline-block;
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+      .footer a:has(.footer-image):hover .footer-image {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+      }
+      @media (max-width: 576px) {
+        .footer .footer-image {
+          max-width: 48%;
+          margin-top: 8px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+      .footer a { color: #dff3db; text-decoration: none; }
+      .footer a:hover { color: #fff; text-decoration: underline; }
+      .footer .footer-brand { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; }
+      .footer .social a { margin-right: 8px; display: inline-flex; align-items: center; justify-content: center; width:36px; height:36px; background: rgba(255,255,255,0.04); border-radius:6px; }
+      .footer small { color: rgba(255,255,255,0.75); }
+      /* Our Group styling (larger list in footer) */
+      .footer .our-group { transform: translateX(-10px); }
+      .footer .our-group h5 { font-size: 1.05rem; margin-bottom: 8px; font-weight: 600; }
+      .footer .our-group li { font-size: 1.03rem; color: #e6f3e8; margin-bottom: 6px; }
+      @media (max-width: 576px) { .footer .text-md-end { text-align: left !important; } }
+
+      /* Page Navigation Styles */
+      .page-navigation {
+        background: linear-gradient(180deg, #e4e8b8 0%, #d8e0a0 100%);
+        padding: 30px 0;
+        margin-bottom: 0;
+        border-top: 2px solid rgba(27, 168, 104, 0.3);
+      }
+
+      .nav-btn {
+        background: linear-gradient(135deg, #1ba868 0%, #0d6a4f 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        margin: 0 15px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 220ms ease;
+        box-shadow: 0 4px 12px rgba(27, 168, 104, 0.3);
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(27, 168, 104, 0.4);
+      }
+
+      .nav-btn:active {
+        transform: translateY(0);
+      }
+
+      .nav-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .page-indicator {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #0d6a4f;
+        margin: 0 20px;
+        display: inline-block;
+      }
+
+      .page-content {
+        animation: fadeIn 0.3s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .nav-btn {
+          padding: 10px 16px;
+          margin: 8px 5px;
+          font-size: 0.9rem;
+        }
+        .page-indicator {
+          font-size: 0.95rem;
+          margin: 0 10px;
+        }
+      }
+    </style>
+  </head>
+  <body style="background-color: #33a67d; color: #505235;">
+      <header class="site-header">
+        <div class="container text-center">
+          <h1 class="site-title">
+            <span class="title-decor" aria-hidden="true">
+              <!-- small decorative leaf SVG -->
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                <path d="M3 21s6-4 9-7 7-9 7-9-6 1-10 5S3 21 3 21z" fill="#7fbf7a"/>
+                <path d="M7 14c2-2 5-3 8-4" stroke="#2d6a4f" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>
+              <span class="title-accent">BRIGHT PATH:</span>
+              <span class="title-sub"> Pola Makan & Mobilitas Sosial</span>
+            </span>
+          </h1>
+        </div>
+      </header>
+      <nav class="navbar navbar-expand-lg bg-success-subtle">
+        <!-- bagian navigasi bar -->
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" href="Tugas_SASKolaborasi.html"><h6>HOME PAGE</h6></a>
+          
+          <a class="nav-link active" href="tes.html">INFORMASI</a>
+          <a class="nav-link" href="Produk%20Berkelanjutan.html">PRODUK BERKELANJUTAN</a>
+          <a class="nav-link" href="tes2.html">DAFTAR PUSTAKA</a>
+          <a class="nav-link" href="Untitled-1.html">ABOUT US</a>
+
+        </div>
+    </div>
+  </div>
+</nav>
+<!-- Description (replacing quotes) -->
+    <div id="description" class="py-5">
+      <div class="container">
+        <!-- PAGE 1 -->
+        <div id="page1" class="page-content">
+          <h2 class="text-center mb-5"><b>PENDAHULUAN</b></h2>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="desc-card">
+                <p>
+                  Pola makan dan mobilitas bukan sekadar urusan kebiasaan sehari-hari; keduanya merupakan hasil sejarah panjang, kebijakan publik, dan perubahan budaya. Dari pengaruh kolonial (seperti praktik rijsttafel dan infrastruktur transportasi) hingga penetrasi budaya konsumtif modern lewat media sosial dan bisnis makanan cepat saji, perubahan ini meninggalkan jejak pada kesehatan publik, struktur ekonomi, dan keadilan sosial. 
+                </p>
+              </div>
+              <div class="desc-card">
+                <p>
+                Ketika bagian masyarakat menikmati kelimpahan dan bagian lain menderita kelaparan, pertanyaan besar muncul: bagaimana kita sebagai warga negara dan umat beragama memaknai dan bertindak atas ketimpangan ini?
+                </p>
+              </div>
+            </div>
+          </div>
+          <h2 class="text-center mb-5 mt-5"><b> Jejak sejarah membentuk pola makan dan mobilitas - konteks yang tak boleh dilupakan
+</b></h2>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="desc-card">
+                <p>
+                  Sejarah kolonial mempengaruhi dua hal pokok: cara makanan diproduksi dan cara orang berpindah. Pendekatan ekonomi kolonial menggeser pola pangan lokal (sagu, ubi) menuju produksi beras dan komoditas tertentu yang menguntungkan pasar. Praktik penyajian dan budaya makan yang dibawa penguasa kolonial, seperti rijsttafel, juga mengubah kebiasaan sosial. Di sisi mobilitas, pembangunan jalan, pelabuhan, dan tata kota pada masa kolonial membentuk jalur pertumbuhan ekonomi yang hingga kini memengaruhi migrasi pedesaan-kota dan konsentrasi layanan di pusat-pusat urban. Globalisasi dan teknologi mempercepat perubahan ini: makanan impor dan fast food menyebar cepat, sementara urbanisasi menumpuk pencarian pekerjaan dan layanan di kota besar.
+                    <strong>a. Rancang kebijakan pengurangan limbah pangan: insentif bagi restoran/hotel untuk menyalurkan surplus, peraturan pengelolaan limbah makanan, dan program distribusi pangan ke daerah rawan pangan.</strong>
+                    <strong>b. Perbaiki infrastruktur logistik untuk jangkauan pangan ke wilayah terpencil (mencakup Papua).</strong>
+                    <strong>c. Perkuat program bantuan sosial dan layanan kesehatan gizi untuk anak-anak dan ibu hamil di daerah tertinggal.</strong>
+                </p>
+              </div>
+              <div class="desc-card">
+                <p>
+                 Dari perspektif PPKn, warisan ini terkait dengan hak dan kewajiban warga: <strong>hak atas kesehatan, hak dan kebebasan bergerak, serta kewajiban ikut menjaga ketertiban dan kesejahteraan umum sebagaimana tercantum di UUD 1945.</strong> Sejarah menunjukkan bahwa kebijakan masa lalu membentuk kondisi struktural yang memerlukan koreksi melalui kebijakan publik dan partisipasi warga.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PAGE 2 -->
+        <div id="page2" class="page-content" style="display: none;">
+        <h2 class="text-center mb-5 mt-5"><b>Ajaran Katolik: makanan, kemurahan hati, dan kecaman terhadap pemborosan - kerangka moral
+</b></h2>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="desc-card">
+              <p>
+                Ajaran sosial Katolik menekankan martabat manusia, preferensi bagi kaum miskin, solidaritas, dan tugas bersama memelihara ciptaan. Dalam kerangka itu:
+              </p>
+            </div>
+            <div class="desc-card">
+              <p>
+<b>Makanan sebagai berkat dan tanggung jawab:</b> Makanan dipandang bukan sekadar komoditas, tetapi pemberian yang bernilai moral. Menghormati pemberian ini berarti tidak boros dan tidak memperlakukan makanan sebagai barang untuk pamer.
+<b>Preferensi bagi kaum miskin:</b> Gereja menegaskan bahwa kebijakan dan perilaku yang mengabaikan kebutuhan kaum miskin bertentangan dengan semangat keadilan Kristiani. Ketidakpedulian terhadap kelaparan adalah bentuk ketidakadilan sosial.
+
+<b>Pemborosan dan pemborosan makanan:</b> Secara moral, membuang makanan atau sengaja menampilkan kemewahan makan sambil mengabaikan lapar sesama dapat dikritik keras-disebut sebagai dosa sosial atau tindakan yang sangat tercela. Ini bukan semata-mata soal kesalahan etik kecil; ketika pemborosan makanan terjadi di tengah penderitaan orang lain akibat kelaparan sistemik, gereja menyebutnya sebagai ungkapan ketidakadilan yang serius.
+
+              </p>
+            </div>
+            <div class="desc-card">
+              <p>
+<b>Dimensi dosa sosial:</b> <strong></strong>Dalam terminologi Katolik, dosa tidak selalu hanya persoalan personal; ada dosa struktural atau sosial — praktik, kebijakan, atau budaya yang menghasilkan kerusakan pada kelompok rentan. Ketidakpedulian kelas atas terhadap makanan yang selalu dibuang adalah salah satu wujud tindakan yang sangat menegaskan ketidakadilan yang parah tersebut.</strong>
+
+              <b>Perlu kejelasan:</b> <strong>Menyatakan bahwa membuang makanan oleh orang kaya adalah “kejahatan berat” berarti menilai secara moral bahwa tindakan itu sangat bertentangan dengan kebenaran dan belas kasih - bukan menyatakan bahwa ia secara hukum sama dengan tindak kriminal pada pengadilan negara.</strong> <strong>Ajaran Katolik menilai tindakan tersebut sebagai pelanggaran moral serius (dosa sosial) yang menginginkan pertobatan, reparasi, dan perubahan struktur sosial agar tidak terulang.</strong>
+
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- New Section: Implikasi PPKn dan UUD 1945 -->
+        <h2 class="text-center mb-5 mt-5"><b>Implikasi PPKn dan UUD 1945: Tanggung Jawab Warga & Peran Negara</b></h2>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="desc-card">
+              <p>
+                UUD 1945 memuat hak-hak dasar (mis. hak atas kesehatan Pasal 28H) dan tanggung jawab negara terhadap kesejahteraan sosial (Pasal 33 & 34). Dari perspektif PPKn:
+Peran warga: <strong>Menjaga pola makan sehat, berperilaku bertanggung jawab terhadap penggunaan sumber daya, dan berpartisipasi dalam upaya sosial untuk mengurangi ketimpangan adalah bagian dari kewajiban warga.</strong>
+
+Peran negara: <strong>Menjamin akses pangan, merancang kebijakan penyediaan dan distribusi pangan, serta mengatur industri makanan agar adil dan berkelanjutan.</strong> <strong>Negara juga perlu kebijakan yang mengurangi limbah pangan (mis. regulasi distribusi makanan surplus, insentif bank makanan, aturan label kedaluwarsa yang jelas).</strong>
+
+Keterkaitan moral-konstitusional: <strong>Ketika warga kaya menghamburkan makanan, itu bukan sekadar persoalan moral; hal itu memengaruhi kesejahteraan umum sehingga menjadi perhatian publik dan kebijakan.</strong> <strong>PPKn menuntut respons kolektif, bukan hanya penilaian individual.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dari etika ke tindakan: rekomendasi praktis -->
+        <h2 class="text-center mb-5 mt-5"><b>Dari Etika ke Tindakan: Rekomendasi Praktis</b></h2>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="desc-card">
+              <p>
+                Untuk individu (khususnya mereka yang berkecukupan):
+
+<strong></strong>a. Kembangkan kebiasaan mengukur porsi, memprioritaskan menghabiskan makanan yang telah disajikan, dan memberikan sisa yang aman ke bank makanan atau organisasi sosial.</strong>
+
+<strong>b. Hindari pembelian atau konsumsi berlebihan yang hanya karena gengsi atau pamer.</strong>
+
+<strong>c. Edukasi diri dan keluarga soal nilai moral penggunaan sumber daya dan solidaritas sosial.</strong>
+              </p>
+            </div>
+            <div class="desc-card">
+              <p>
+                Untuk sekolah dan komunitas gereja:
+
+<strong></strong>a. Ajarkan nilai solidaritas dan pengelolaan makanan dalam kurikulum agama dan kegiatan sosial.</strong>
+
+<strong>b. Adakan program "sisa makanan" yang aman untuk disalurkan ke yang membutuhkan.</strong>
+
+<strong>c. Selenggarakan kampanye melawan budaya pamer konsumtif di kalangan remaja (termasuk penggunaan media sosial).</strong>
+              </p>
+            </div>
+            <div class="desc-card">
+              <p>
+<b>Makanan sebagai berkat dan tanggung jawab:</b> <strong>Makanan dipandang bukan sekadar komoditas, tetapi pemberian yang bernilai moral. Menghormati pemberian ini berarti tidak boros dan tidak memperlakukan makanan sebagai barang untuk pamer.</strong>
+<b>Preferensi bagi kaum miskin:</b> <strong>Gereja menegaskan bahwa kebijakan dan perilaku yang mengabaikan kebutuhan kaum miskin bertentangan dengan semangat keadilan Kristiani. Ketidakpedulian terhadap kelaparan adalah bentuk ketidakadilan sosial.</strong>
+
+<b>Pemborosan dan pemborosan makanan:</b> <strong>Secara moral, membuang makanan atau sengaja menampilkan kemewahan makan sambil mengabaikan lapar sesama dapat dikritik keras—disebut sebagai dosa sosial atau tindakan yang sangat tercela.</strong> <strong>Ini bukan semata-mata soal kesalahan etik kecil; ketika pemborosan makanan terjadi di tengah penderitaan orang lain akibat kelaparan sistemik, gereja menyebutnya sebagai ungkapan ketidakadilan yang serius.</strong>
+
+              </p>
+              </p>
+            </div>
+            <div class="desc-card">
+              <p>
+                Untuk gereja dan organisasi keagamaan:
+
+<strong></strong>a. Aktifkan peran subsidi sosial: dapur umum, bank makanan, advokasi kebijakan pro-rakyat.</strong>
+
+<strong>b. Kembalikan ajaran tentang kesederhanaan, dermawan, dan tanggung jawab ekologis ke dalam khotbah, retret, dan pelayanan pastoral.</strong>
+
+<strong>c. Bekerja sama dengan organisasi kemanusiaan untuk program bantuan berkelanjutan.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mengajarkan sikap kritis terhadap media dan gaya hidup konsumtif -->
+        <h2 class="text-center mb-5 mt-5"><b>Mengajarkan Sikap Kritis terhadap Media dan Gaya Hidup Konsumtif</b></h2>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="desc-card">
+              <p>
+                Mengembangkan sikap kritis adalah kunci agar masyarakat, terutama generasi muda, tidak mudah terperdaya oleh iklan, tren viral, atau budaya pamer. Langkah konkret:
+
+Literasi media: <strong></strong>Mengajarkan cara membaca iklan, memeriksa sumber informasi, dan menyadari teknik pemasaran yang memicu konsumsi berlebih.</strong>
+
+Penguatan nilai etika di sekolah: <strong>Integrasikan pembelajaran moral—dari sejarah, PPKn, dan agama—dalam proyek nyata seperti pengurangan sampah makanan.</strong>
+
+Role model: <strong>Pemuka agama, tokoh publik, dan keluarga mencontohkan gaya hidup sederhana dan penggunaan sumber daya bertanggung jawab.</strong>
+
+Pengalaman langsung: <strong>Program kunjungan ke daerah rawan pangan membantu siswa melihat realitas ketimpangan sehingga empati dan tanggung jawab tumbuh nyata.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kesimpulan -->
+        <h2 class="text-center mb-5 mt-5"><b>Kesimpulan</b></h2>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="desc-card">
+              <p>
+                Pola makan dan mobilitas hari ini adalah hasil sejarah panjang yang membutuhkan jawaban komprehensif: pendidikan kritis (sejarah, PPKn, agama), kebijakan publik yang adil, dan tindakan moral nyata dari individu dan komunitas. Dalam ajaran Katolik, membuang makanan di tengah kelaparan adalah tindakan yang sangat tercela secara moral karena menyerang martabat manusia dan memperkokoh ketidakadilan struktural. Namun, penekanan utama bukan sekadar menuduh, melainkan menggerakkan pertobatan kolektif: mengurangi pemborosan, menyalurkan surplus, memperjuangkan kebijakan yang menjamin akses pangan, serta mendidik generasi muda agar kritis dan bertanggung jawab.
+
+Panggilan akhirnya bersifat ganda: sebagai warga negara kita harus mendorong dan mendukung kebijakan publik yang adil; sebagai umat beragama kita harus menghidupi nilai kasih, keadilan, dan solidaritas. Ketika kedua panggilan itu bersatu, kita memajukan bangsa yang tidak hanya makmur di angka, tetapi adil dalam realitas hidup setiap warganya.
+              </p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- Page Navigation Controls -->
+      <div class="page-navigation">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <button class="nav-btn" id="prevBtn" onclick="goToPreviousPage()">← Previous Page</button>
+              <span class="page-indicator"><span id="currentPage">1</span> / <span id="totalPages">2</span></span>
+              <button class="nav-btn" id="nextBtn" onclick="goToNextPage()">Next Page →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Redesigned footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-md-3 mb-3">
+        <div class="footer-brand">BRIGHT PATH</div>
+        <p style="max-width:170px; color:#e6f3e8;">A community initiative focused on nutrition and social mobility. Join our workshops and local programs to build healthier, more resilient communities.</p>
+      </div>
+      <div class="col-md-3 mb-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="Tugas_SASKolaborasi.html">Home Page</a></li>
+          <li><a href="tes.html">Informasi</a></li>
+          <li><a href="tes2.html">Daftar Pustaka</a></li>
+          <li><a href="Untitled-1.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-3 our-group">
+        <h5>Our Group</h5>
+        <ul class="list-unstyled">
+          <li>Algre <span style="font-weight:600; color:#e6f3e8;">X1/03</span></li>
+          <li>Michelle <span style="font-weight:600; color:#e6f3e8;">X1/14</span></li>
+          <li>Jethro <span style="font-weight:600; color:#e6f3e8;">X1/15</span></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-3 text-md-end">
+        <h5><b>SMA ST. THERESIA</b></h5>
+        <div>
+          <a href="https://www.sttheresia-jkt.sch.id/" target="_blank" rel="noopener noreferrer">
+            <img src="Logo-SMA-Transparan.png" alt="BRIGHT PATH image" class="footer-image img-fluid">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-3"><small>© 2025 BRIGHT PATH — <a href="#"><span style="font-weight:600; color:#e6f3e8;">"Menjadi Pemimpin yang Peduli, Kreatif, dan Berwawasan Global"</span></a></small></div>
+  </div>
+</footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" aria-label="Back to top">↑<span class="visually-hidden">Back to top</span></button>
+
+    <script>
+      let currentPage = 1;
+      const totalPages = 2;
+
+      function showPage(pageNum) {
+        // Hide all pages
+        document.querySelectorAll('.page-content').forEach(page => {
+          page.style.display = 'none';
+        });
+
+        // Show current page
+        document.getElementById('page' + pageNum).style.display = 'block';
+
+        // Update page indicator
+        document.getElementById('currentPage').textContent = pageNum;
+
+        // Update button states
+        document.getElementById('prevBtn').disabled = pageNum === 1;
+        document.getElementById('nextBtn').disabled = pageNum === totalPages;
+
+        // Scroll to top of content
+        document.getElementById('description').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function goToNextPage() {
+        if (currentPage < totalPages) {
+          currentPage++;
+          showPage(currentPage);
+        }
+      }
+
+      function goToPreviousPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+        }
+      }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        showPage(1);
+      });
+
+      // Back to Top functionality
+      window.onscroll = function() {
+        const btn = document.getElementById('backToTop');
+        // show after 100px scrolled
+        if (document.documentElement.scrollTop > 100) {
+          btn.classList.add('show-back');
+        } else {
+          btn.classList.remove('show-back');
+        }
+      };
+
+      document.getElementById('backToTop').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+    <!-- Load Bootstrap JS at end of body to avoid render blocking -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Hero: Split titles into characters and animate on entrance (respects reduced-motion) -->
+    <script>
+    (function(){
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      function splitText(selector){
+        document.querySelectorAll(selector).forEach(function(el){
+          if (el.dataset.splitted) return;
+          var text = el.textContent || '';
+          // Keep surrounding whitespace trimmed but preserve internal spaces
+          text = text.trim();
+          el.textContent = '';
+          var i = 0;
+          for (var ch of text){
+            var span = document.createElement('span');
+            span.className = 'char';
+            if (ch === ' ') span.innerHTML = '&nbsp;'; else span.textContent = ch;
+            span.style.setProperty('--i', i);
+            el.appendChild(span);
+            i++;
+          }
+          el.dataset.splitted = '1';
+        });
+      }
+
+      function animateSlideChars(slide){
+        if (!slide) return;
+        var chars = slide.querySelectorAll('.char');
+        chars.forEach(function(span){
+          var i = parseInt(span.style.getPropertyValue('--i') || 0, 10);
+          var delay = (i * 0.04).toFixed(2);
+          span.style.animation = 'none';
+          // force reflow
+          void span.offsetWidth;
+          span.style.animation = 'charIn 620ms cubic-bezier(.2,.8,.2,1) ' + delay + 's both';
+        });
+
+        var subs = slide.querySelectorAll('.hero-subtitle');
+        subs.forEach(function(sub, idx){
+          sub.style.animation = 'none';
+          void sub.offsetWidth;
+          sub.style.animation = 'heroSubtitleIn 700ms ease ' + (0.18) + 's both';
+        });
+      }
+
+      // Split hero titles on load
+      splitText('.hero-title');
+
+      var carousel = document.getElementById('heroCarousel');
+      if (carousel){
+        // animate first active slide
+        var active = carousel.querySelector('.carousel-item.active');
+        animateSlideChars(active);
+
+        // re-animate when slide finishes sliding
+        carousel.addEventListener('slid.bs.carousel', function(){
+          var now = carousel.querySelector('.carousel-item.active');
+          animateSlideChars(now);
+        });
+      }
+    })();
+    </script>
+  
+</body>
+</html>
